@@ -44,19 +44,22 @@
             <p>{{ currentDialogItem.details }}</p>
             <br />
             <h3>Rocket Detail</h3>
-            <p>{{ rocket?.value?.description }}</p>
+            <p>{{ rocket?.value?.description ?? "no description" }}</p>
             <p>
               <span class="bold">height: </span
-              >{{ rocket?.value?.height.meters }} meters
+              >{{ rocket?.value?.height.meters ?? "-" }} meters
             </p>
             <p>
-              <span class="bold">mass: </span>{{ rocket?.value?.mass?.kg }} kg
+              <span class="bold">mass: </span
+              >{{ rocket?.value?.mass?.kg ?? "-" }} kg
             </p>
             <p>
-              <span class="bold">company: </span>{{ rocket?.value?.company }}
+              <span class="bold">company: </span
+              >{{ rocket?.value?.company ?? "-" }}
             </p>
             <p>
-              <span class="bold">country: </span>{{ rocket?.value?.country }}
+              <span class="bold">country: </span
+              >{{ rocket?.value?.country ?? "-" }}
             </p>
           </v-card-text>
 
@@ -106,7 +109,7 @@ export default {
           key: "upcoming",
         },
         {
-          title: "detail",
+          title: "Detail",
           key: "detail",
           sortable: false,
         },
@@ -131,9 +134,6 @@ export default {
       if (bool === true) {
         return "กำลังจะปล่อย";
       } else return "ปล่อยแล้ว";
-    },
-    onButtonClick(item) {
-      console.log(item);
     },
     showDialog(item) {
       this.show = true;
@@ -160,6 +160,8 @@ export default {
   color: #2c3e50;
 }
 h1 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
   text-align: center;
 }
 .bold {
@@ -168,7 +170,6 @@ h1 {
 .container {
   display: flex;
   justify-content: center;
-  width: 40%;
   margin: 0 auto;
 }
 .v-data-table-footer__items-per-page {

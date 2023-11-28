@@ -28,6 +28,7 @@
     <DetailTableAll :all_data="launches" :statusRequire="true" />
   </div>
   <div class="test">
+    <DetailTable :all_data="launchesPast" title="ตารางการปล่อยจรวดในอดีต" />
     <DetailTable
       :all_data="launchesUpcoming"
       title="ตารางการปล่อยจรวดที่กำลังจะถึง"
@@ -38,6 +39,7 @@
 <script>
 import getAllLaunches from "@/services/launches.js";
 import getUpcomingLaunches from "@/services/launchesUpcoming";
+import getPastLaunches from "@/services/launchesPast";
 import DetailTableAll from "./DetailTableAll.vue";
 import DetailTable from "./DetailTable.vue";
 
@@ -46,8 +48,10 @@ export default {
     const { launches, error, load } = getAllLaunches();
     const { launchesUpcoming, errorUpcoming, loadUpcoming } =
       getUpcomingLaunches();
+    const { launchesPast, errorPast, loadPast } = getPastLaunches();
     load();
     loadUpcoming();
+    loadPast();
     return {
       launches,
       error,
@@ -55,6 +59,9 @@ export default {
       launchesUpcoming,
       errorUpcoming,
       loadUpcoming,
+      launchesPast,
+      errorPast,
+      loadPast,
       // itemPerPage: 10,
       // headers: [
       //   {

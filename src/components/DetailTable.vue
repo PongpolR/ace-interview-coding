@@ -33,8 +33,30 @@
         <v-card title="">
           <v-card-text>
             <h3>{{ currentDialogItem.name }}</h3>
-
+            <v-img
+              :src="currentDialogItem.links.patch.small"
+              height="200px"
+            ></v-img>
             <p>{{ currentDialogItem.details }}</p>
+            <br />
+            <h3>Rocket Detail</h3>
+            <p>{{ rocket?.value?.description ?? "no description" }}</p>
+            <p>
+              <span class="bold">height: </span
+              >{{ rocket?.value?.height.meters ?? "-" }} meters
+            </p>
+            <p>
+              <span class="bold">mass: </span
+              >{{ rocket?.value?.mass?.kg ?? "-" }} kg
+            </p>
+            <p>
+              <span class="bold">company: </span
+              >{{ rocket?.value?.company ?? "-" }}
+            </p>
+            <p>
+              <span class="bold">country: </span
+              >{{ rocket?.value?.country ?? "-" }}
+            </p>
           </v-card-text>
 
           <v-card-actions>
@@ -79,7 +101,7 @@ export default {
           sortable: false,
         },
         {
-          title: "detail",
+          title: "Detail",
           key: "detail",
           sortable: false,
         },
@@ -90,6 +112,7 @@ export default {
     return {
       show: false,
       currentDialogItem: {},
+      rocket: {},
     };
   },
   methods: {
@@ -102,6 +125,15 @@ export default {
     showDialog(item) {
       this.show = true;
       this.currentDialogItem = item;
+      this.fetchRocket(this.currentDialogItem.rocket);
+      console.log(this.rocket);
+    },
+    async fetchRocket(id) {
+      let data = await fetch(`https://api.spacexdata.com/v4/rockets/${id}`);
+      if (!data.ok) {
+        throw Error("no data");
+      }
+      this.rocket.value = await data.json();
     },
   },
 };
@@ -120,7 +152,7 @@ h1 {
 .container {
   display: flex;
   justify-content: center;
-  width: 40%;
+  width: 45%;
   margin: 0 auto;
 }
 .v-data-table-footer__items-per-page {
