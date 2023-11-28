@@ -27,6 +27,6 @@ npm run dev
 ### Deploy ด้วย Netlify
 
 ```
-https://tata-pongpol-rocket-launch.netlify.app/
+- https://tata-pongpol-rocket-launch.netlify.app/
 
 ```
