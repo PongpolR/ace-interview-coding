@@ -1,92 +1,115 @@
 <template lang="">
-  <div v-if="launches">
+  <!-- <div v-if="launches" class="container">
     <v-data-table
       v-model:items-per-page="itemPerPage"
       :headers="headers"
       :items="data"
-      :item-value="id"
       class="elevation-1"
     >
       <template v-slot:item.date_utc="{ item }">
         <span>{{ formatDate(item.date_utc) }}</span>
       </template>
+
+      <template v-slot:item.links.patch.large="{ item }">
+        <div class="p-2" v-if="item.links.patch.large">
+          <v-img :src="item.links.patch.large"></v-img>
+        </div>
+        <div class="p-2" v-else>
+          <span>-</span>
+        </div>
+      </template>
+
       <template v-slot:item.upcoming="{ item }">
         <span>{{ status(item.upcoming) }}</span>
       </template>
     </v-data-table>
+  </div> -->
+  <div class="test">
+    <DetailTableAll :all_data="launches" :statusRequire="true" />
+  </div>
+  <div class="test">
+    <DetailTable
+      :all_data="launchesUpcoming"
+      title="ตารางการปล่อยจรวดที่กำลังจะถึง"
+    />
   </div>
 </template>
 
 <script>
 import getAllLaunches from "@/services/launches.js";
-// import { VDataTable } from "vuetify/labs/VDataTable";
+import getUpcomingLaunches from "@/services/launchesUpcoming";
+import DetailTableAll from "./DetailTableAll.vue";
+import DetailTable from "./DetailTable.vue";
+
 export default {
   setup() {
     const { launches, error, load } = getAllLaunches();
+    const { launchesUpcoming, errorUpcoming, loadUpcoming } =
+      getUpcomingLaunches();
     load();
+    loadUpcoming();
     return {
       launches,
       error,
       load,
-      itemPerPage: 10,
-      headers: [
-        {
-          title: "Name",
-          key: "name",
-        },
-        {
-          title: "Date",
-          key: "date_utc",
-        },
-        // {
-        //   title: "Img",
-        //   key: 'links["patch"]["small"]',
-        // },
-        // {
-        {
-          title: "Status",
-          key: "upcoming",
-        },
-      ],
-      data: launches,
+      launchesUpcoming,
+      errorUpcoming,
+      loadUpcoming,
+      // itemPerPage: 10,
+      // headers: [
+      //   {
+      //     title: "ชื่อ",
+      //     key: "name",
+      //   },
+      //   {
+      //     title: "เวลาที่ปล่อย",
+      //     key: "date_utc",
+      //   },
+      //   {
+      //     title: "รูปภาพ",
+      //     key: "links.patch.large",
+      //     sortable: false,
+      //   },
+      //   {
+      //     title: "สถานะ",
+      //     key: "upcoming",
+      //   },
+      //   {
+      //     align: "center",
+      //     title: "จำนวน crew",
+      //     key: "cores.length",
+      //   },
+      // ],
+      // data: launches,
     };
   },
-  methods: {
-    formatDate(date) {
-      let dateText = new Date(date).toLocaleString();
-      dateText = dateText.replace(",", "");
-      // console.log(dateText);
-      return dateText;
-    },
-    status(bool) {
-      if (bool === true) {
-        return "กำลังจะปล่อย";
-      } else return "ปล่อยแล้ว";
-    },
-  },
-  // components: {
-  //   VDataTable,
+  // data() {
+  //   const { launches, error, load } = getAllLaunches();
+  //   load();
+  //   const { launchesUpcoming, errorUpcoming, loadUpcoming } =
+  //     getUpcomingLaunches();
+  //   loadUpcoming();
+  //   return {
+  //     all_data: launches,
+  //   };
   // },
+  // methods: {
+  //   formatDate(date) {
+  //     let dateText = new Date(date).toLocaleString();
+  //     dateText = dateText.replace(",", "");
+  //     // console.log(dateText);
+  //     return dateText;
+  //   },
+  //   status(bool) {
+  //     if (bool === true) {
+  //       return "กำลังจะปล่อย";
+  //     } else return "ปล่อยแล้ว";
+  //   },
+  // },
+  components: {
+    DetailTableAll,
+    DetailTable,
+  },
 };
-
-// const items = [
-//   {
-//     name: "African Elephant",
-//     species: "Loxodonta africana",
-//     diet: "Herbivore",
-//     habitat: "Savanna, Forests",
-//   },
-// ];
 </script>
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300;500&display=swap");
-* {
-  font-family: "Kanit", sans-serif;
-}
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>

@@ -1,8 +1,5 @@
 <template>
-  <h1>รายการการปล่อยจรวด</h1>
-  <v-container class="fill-height">
-    <data-table />
-  </v-container>
+  <v-container> <data-table /> </v-container>
 </template>
 
 <script>
