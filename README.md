@@ -19,35 +19,14 @@ bun install
 ### Compiles and hot-reloads for development
 
 ```
-# yarn
-yarn dev
-
 # npm
 npm run dev
 
-# pnpm
-pnpm dev
-
-# bun
-bun run dev
 ```
 
-### Compiles and minifies for production
+### Deploy ด้วย Netlify
 
 ```
-# yarn
-yarn build
+https://tata-pongpol-rocket-launch.netlify.app/
 
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# bun
-bun run build
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).

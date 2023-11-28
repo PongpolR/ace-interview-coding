@@ -1,5 +1,5 @@
 <template lang="">
-  <h1>ตารางการปล่อยจรวดทั้งหมด</h1>
+  <h1>การปล่อยจรวดทั้งหมด</h1>
   <div v-if="all_data" class="container">
     <v-data-table
       :items-per-page="itemPerPage"
@@ -28,9 +28,6 @@
         <v-btn @click="showDialog(item)">Detail</v-btn>
       </template>
     </v-data-table>
-    <!-- <v-dialog v-model="show">
-      {{ currentDialogItem }}
-    </v-dialog> -->
 
     <v-dialog v-model="show" width="500">
       <template v-slot:default="{ isActive }">
@@ -127,7 +124,6 @@ export default {
     formatDate(date) {
       let dateText = new Date(date).toLocaleString();
       dateText = dateText.replace(",", "");
-      // console.log(dateText);
       return dateText;
     },
     status(bool) {

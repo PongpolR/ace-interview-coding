@@ -24,9 +24,6 @@
         <v-btn @click="showDialog(item)">Detail</v-btn>
       </template>
     </v-data-table>
-    <!-- <v-dialog v-model="show">
-      {{ currentDialogItem }}
-    </v-dialog> -->
 
     <v-dialog v-model="show" width="500">
       <template v-slot:default="{ isActive }">
@@ -119,7 +116,6 @@ export default {
     formatDate(date) {
       let dateText = new Date(date).toLocaleString();
       dateText = dateText.replace(",", "");
-      // console.log(dateText);
       return dateText;
     },
     showDialog(item) {
@@ -152,7 +148,7 @@ h1 {
 .container {
   display: flex;
   justify-content: center;
-  width: 45%;
+  width: 800px;
   margin: 0 auto;
 }
 .v-data-table-footer__items-per-page {
